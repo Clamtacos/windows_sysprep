@@ -33,7 +33,7 @@ $CurrentVC = Get-WmiObject -Class Win32_Product -Filter "Name LIKE '%Visual C++%
 Foreach ($App in $json.MicrosftVCRuntime) {
 Write-Host ("Checking if {0} is already installed..." -f $App)
     if (!($CurrentVC | Select-String $App.split('+')[2].SubString(0, 4) | Select-String $App.split('-')[1])) {
-        Write-Host ("{0} was not found and installing now" -f $App)
+        Write-Host ("{0} not found, installing..." -f $App)
         winget.exe install $App --force --source winget --accept-package-agreements --accept-source-agreements
     }
 

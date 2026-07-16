@@ -31,11 +31,20 @@ if (!(Get-AppxPackage -Name Microsoft.Winget.Source)) {
 
 $CurrentVC = Get-WmiObject -Class Win32_Product -Filter "Name LIKE '%Visual C++%'" -ErrorAction SilentlyContinue | Select-Object Name
 Foreach ($App in $json.MicrosftVCRuntime) {
-Write-Host ("Checking if {0} is already installed..." -f $App)
+Write-Host ("Verifying if {0} is installed..." -f $App)
     if (!($CurrentVC | Select-String $App.split('+')[2].SubString(0, 4) | Select-String $App.split('-')[1])) {
         Write-Host ("{0} not found, installing..." -f $App)
         winget.exe install $App --force --source winget --accept-package-agreements --accept-source-agreements
-    }
+}
+
+Foreach ($App in $json.Apps) {
+    Write-Host ("Verifying if {0} is installed..." -f $App)
+    winget.exe list --id $App --accept-source-agreements | Out-Null
+    if ($LASTEXITCODE -eq '-1978335212') {
+        Write-Host ("{0} not found, installing..." -f $App.Split('.')[1])
+        winget.exe install $App --silent --force --source winget --accept-package-agreements --accept-source-agreements
+    } 
+}
 
 Set-PSRepository PSGallery -InstallationPolicy Trusted
 

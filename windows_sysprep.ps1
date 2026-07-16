@@ -35,6 +35,7 @@ Write-Host ("Verifying if {0} is installed..." -f $App)
     if (!($CurrentVC | Select-String $App.split('+')[2].SubString(0, 4) | Select-String $App.split('-')[1])) {
         Write-Host ("{0} not found, installing..." -f $App)
         winget.exe install $App --force --source winget --accept-package-agreements --accept-source-agreements
+    }
 }
 
 Foreach ($App in $json.Apps) {

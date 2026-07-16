@@ -1,0 +1,29 @@
+{
+    "Apps": [
+        "7zip.7zip",
+        "Brave.Brave",
+        "CorbinDavenport.NexusTools,"
+        "Git.Git",
+        "GitHub.GitHubDesktop",
+        "Google.PlatformTools",
+        "lsd-rs.lsd",
+        "Microsoft.dotnetRuntime.3.1",
+        "Microsoft.dotnetRuntime.5",
+        "Microsoft.EdgeWebView2Runtime",
+        "Microsoft.Powershell",
+        "Microsoft.WindowsTerminal",
+        "OpenJS.NodeJS",
+        "Python.Python.3",
+        "tldr-pages.tlrc"
+    ],
+    "MicrosftVCRuntime": [
+        "Microsoft.VC++2008Redist-x86",
+        "Microsoft.VC++2008Redist-x64",
+        "Microsoft.VC++2010Redist-x64",
+        "Microsoft.VC++2010Redist-x86",
+        "Microsoft.VC++2012Redist-x64",
+        "Microsoft.VC++2012Redist-x86",
+        "Microsoft.VC++2013Redist-x64",
+        "Microsoft.VC++2013Redist-x86"
+    ]
+}

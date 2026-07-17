@@ -19,7 +19,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force:$True -Confirm:$False -ErrorAct
 Set-Variable -Name 'ConfirmPreference' -Value 'None' -Scope Script
 
 $ProgressPreference = 'Continue'
-$json = Get-Content "($PSScriptRoot)windows_sysprep.json" | ConvertFrom-Json
+$json = Get-Content "$($PSScriptRoot)\windows_sysprep.json" | ConvertFrom-Json
 
 if (!(Get-AppxPackage -Name Microsoft.Winget.Source)) {
     Write-Host ("Winget not found, installing...")

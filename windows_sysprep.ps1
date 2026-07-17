@@ -44,7 +44,6 @@ if (!(Get-AppxPackage -Name Microsoft.Winget.Source)) {
             winget.exe install $App --silent --force --source winget --accept-package-agreements --accept-source-agreements
         } 
     }
-}
 Stop-Transcript
 
 

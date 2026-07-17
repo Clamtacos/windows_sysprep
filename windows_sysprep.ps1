@@ -9,7 +9,7 @@ Installs & configures all options from windows_sysprep.json
 Screen output and operations logged in %Temp%\windows_sysprep.log
 
 .LINK
-None
+https://github.com/Clamtacos/windows_sysprep/blob/main/windows_sysprep.ps1
 #>
 
 #Requires -RunAsAdministrator
@@ -19,7 +19,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force:$True -Confirm:$False -ErrorAct
 Set-Variable -Name 'ConfirmPreference' -Value 'None' -Scope Script
 
 $ProgressPreference = 'Continue'
-$json = Get-Content "$($PSScriptRoot)\windows_sysprep.json" | ConvertFrom-Json
+$json = Get-Content "$($PSScriptRoot)\preconfig.json" | ConvertFrom-Json
 
 if (!(Get-AppxPackage -Name Microsoft.Winget.Source)) {
     Write-Host ("Winget not found, installing...")

@@ -16,8 +16,9 @@ None
 Start-Transcript $ENV:TEMP\windows_sysprep.log
 
 Set-ExecutionPolicy Bypass -Scope Process -Force:$True -Confirm:$False -ErrorAction SilentlyContinue
-Set-Variable -Name 'ConfirmPreference' -Value 'None' -Scope Global
-$ProgressPreference = 'SilentlyContinue'
+Set-Variable -Name 'ConfirmPreference' -Value 'None' -Scope Process
+
+$ProgressPreference = 'Continue'
 $json = Get-Content "($PSScriptRoot)windows_sysprep.json" | ConvertFrom-Json
 
 if (!(Get-AppxPackage -Name Microsoft.Winget.Source)) {

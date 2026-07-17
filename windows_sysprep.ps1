@@ -47,4 +47,21 @@ Foreach ($App in $json.Apps) {
     } 
 }
 
+Foreach ($Feature in $json.WindowsFeatures) {
+    Write-Host ("Verifying if {0} is installed..." -f $Feature)
+    if ((Get-WindowsOptionalFeature -Online -FeatureName:$Feature).State -ne 'Enabled') {
+        Write-Host ("{0} not found, installing..." -f $Feature)
+        Enable-WindowsOptionalFeature -Online -FeatureName:$Feature -NoRestart:$True -ErrorAction SilentlyContinue | Out-Null
+    }
+}
+
+Set-PSRepository PSGallery -InstallationPolicy Trusted
+Foreach ($Module in $json.PowerShellModules) {
+    Write-Host ("Verifying if {0} is installed..." -f $Module)
+    if (!(Get-Module $Module -ListAvailable)) {
+        Write-Host ("{0} PowerShell module not found, installing..." -f $Module)
+        Install-Module -Name $Module -Scope AllUsers -Force:$True -AllowClobber:$True
+    }
+}
+
 Stop-Transcript

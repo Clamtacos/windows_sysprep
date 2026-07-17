@@ -17,7 +17,6 @@ Start-Transcript $ENV:TEMP\windows_sysprep.log
 
 Set-ExecutionPolicy Bypass -Scope Global -Force:$True -Confirm:$False -ErrorAction SilentlyContinue
 Set-Variable -Name 'ConfirmPreference' -Value 'None' -Scope Global
-
 $ProgressPreference = 'SilentlyContinue'
 $json = Get-Content "($PSScriptRoot)\windows_sysprep.json" | ConvertFrom-Json
 
@@ -31,10 +30,10 @@ if (!(Get-AppxPackage -Name Microsoft.Winget.Source)) {
 
 $CurrentVC = Get-WmiObject -Class Win32_Product -Filter "Name LIKE '%Visual C++%'" -ErrorAction SilentlyContinue | Select-Object Name
 Foreach ($App in $json.MSVCRuntime) {
-Write-Host ("Verifying if {0} is installed..." -f $App)
+    Write-Host ("Verifying if {0} is installed..." -f $App)
     if (!($CurrentVC | Select-String $App.split('+')[2].SubString(0, 4) | Select-String $App.split('-')[1])) {
-    Write-Host ("{0} not found, installing..." -f $App)
-    winget.exe install $App --force --source winget --accept-package-agreements --accept-source-agreements
+        Write-Host ("{0} not found, installing..." -f $App)
+        winget.exe install $App --force --source winget --accept-package-agreements --accept-source-agreements
     }
 }
 
@@ -46,7 +45,5 @@ Foreach ($App in $json.Apps) {
         winget.exe install $App --silent --force --source winget --accept-package-agreements --accept-source-agreements
     } 
 }
+
 Stop-Transcript
-
-
-

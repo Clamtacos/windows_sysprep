@@ -15,10 +15,10 @@ None
 #Requires -RunAsAdministrator
 Start-Transcript $ENV:TEMP\windows_sysprep.log
 
-Set-ExecutionPolicy Bypass -Force:$True -Confirm:$False -ErrorAction SilentlyContinue
+Set-ExecutionPolicy Bypass -Scope Process -Force:$True -Confirm:$False -ErrorAction SilentlyContinue
 Set-Variable -Name 'ConfirmPreference' -Value 'None' -Scope Global
 $ProgressPreference = 'SilentlyContinue'
-$json = Get-Content -Path ".\windows_sysprep.json" | ConvertFrom-Json
+$json = Get-Content "($PSScriptRoot)windows_sysprep.json" | ConvertFrom-Json
 
 if (!(Get-AppxPackage -Name Microsoft.Winget.Source)) {
     Write-Host ("Winget not found, installing...")

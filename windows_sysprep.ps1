@@ -15,7 +15,7 @@ None
 #Requires -RunAsAdministrator
 Start-Transcript $ENV:TEMP\windows_sysprep.log
 
-Set-ExecutionPolicy Bypass -Scope Global -Force:$True -Confirm:$False -ErrorAction SilentlyContinue
+Set-ExecutionPolicy Bypass -Scope LocalMachine -Force:$True -Confirm:$False -ErrorAction SilentlyContinue
 Set-Variable -Name 'ConfirmPreference' -Value 'None' -Scope Global
 $ProgressPreference = 'SilentlyContinue'
 $json = Get-Content "($PSScriptRoot)\windows_sysprep.json" | ConvertFrom-Json

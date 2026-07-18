@@ -40,6 +40,7 @@ Foreach ($App in $json.MSVCRuntime) {
     }
 }
 
+Write-Host (" ----| App Installs |-------------------------------------------------------------------------")
 Foreach ($App in $json.Apps) {
     Write-Host ("Verifying if {0} is installed..." -f $App)
     winget.exe list --id $App --accept-source-agreements | Out-Null
@@ -49,6 +50,7 @@ Foreach ($App in $json.Apps) {
     } 
 }
 
+Write-Host (" ----| Windows Optional Features |------------------------------------------------------------")
 Foreach ($Feature in $json.WindowsFeatures) {
     Write-Host ("Verifying if {0} is installed..." -f $Feature)
     if ((Get-WindowsOptionalFeature -Online -FeatureName:$Feature).State -ne 'Enabled') {
@@ -57,7 +59,8 @@ Foreach ($Feature in $json.WindowsFeatures) {
     }
 }
 
-Set-PSRepository PSGallery -InstallationPolicy Trusted
+Write-Host (" ----| PowerShell Modules |-------------------------------------------------------------------")
+Set-PSRepository PSGallery -InstallationPolicy Trusted77
 Foreach ($Module in $json.PowerShellModules) {
     Write-Host ("Verifying if {0} is installed..." -f $Module)
     if (!(Get-Module $Module -ListAvailable)) {

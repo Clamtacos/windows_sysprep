@@ -3,7 +3,7 @@
 Installs programs, modules, features, and downkoads settings using Winget, Powershell, and Github.
 
 .DESCRIPTION
-Installs & configures all options from windows_sysprep.json
+Installs & configures all options from preconfig.json
 
 .OUTPUT
 Screen output and operations logged in %Temp%\windows_sysprep.log
@@ -21,14 +21,16 @@ Set-Variable -Name 'ConfirmPreference' -Value 'None' -Scope Script
 $ProgressPreference = 'Continue'
 $json = Get-Content "$($PSScriptRoot)\preconfig.json" | ConvertFrom-Json
 
+Write-Host (" ----| Winget Installation |------------------------------------------------------------------")
 if (!(Get-AppxPackage -Name Microsoft.Winget.Source)) {
     Write-Host ("Winget not found, installing...")
     Invoke-Webrequest -uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx -Outfile $ENV:TEMP\Microsoft.VCLibs.x64.14.00.Desktop.appx -UseBasicParsing
-    Invoke-Webrequest -uri https://aka.ms/getwinget -Outfile $ENV:TEMP\winget.msixbundle -UseBasicParsing
     Add-AppxPackage $ENV:TEMP\Microsoft.VCLibs.x64.14.00.Desktop.appx -ErrorAction SilentlyContinue
+    Invoke-Webrequest -uri https://aka.ms/getwinget -Outfile $ENV:TEMP\winget.msixbundle -UseBasicParsing
     Add-AppxPackage -Path $ENV:TEMP\winget.msixbundle -ErrorAction SilentlyContinue
 }
 
+Write-Host (" ----| Microsoft Visual C++ Visual Runtime Installations |------------------------------------")
 $CurrentVC = Get-WmiObject -Class Win32_Product -Filter "Name LIKE '%Visual C++%'" -ErrorAction SilentlyContinue | Select-Object Name
 Foreach ($App in $json.MSVCRuntime) {
     Write-Host ("Verifying if {0} is installed..." -f $App)

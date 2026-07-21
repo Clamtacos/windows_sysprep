@@ -5,8 +5,8 @@ Installs programs, modules, features, and downkoads settings using Winget, Power
 .DESCRIPTION
 Installs & configures all options from preconfig.json
 
-.OUTPUT
-Screen output and operations logged in %Temp%\windows_sysprep.log
+.OUTPUTS
+Screen output and operations logged in %Temp%\preconfig.log
 
 .LINK
 https://github.com/Clamtacos/windows_sysprep/blob/main/windows_sysprep.ps1

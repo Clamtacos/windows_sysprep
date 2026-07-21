@@ -6,7 +6,7 @@ Installs programs, modules, features, and downkoads settings using Winget, Power
 Installs & configures all options from preconfig.json
 
 .OUTPUTS
-Screen output and operations logged in %Temp%\preconfig.log
+Screen output and operations logged in %Temp%\windows_sysprep.log
 
 .LINK
 https://github.com/Clamtacos/windows_sysprep/blob/main/windows_sysprep.ps1
@@ -60,7 +60,7 @@ Foreach ($Feature in $json.WindowsFeatures) {
 }
 
 Write-Host (" ----| PowerShell Modules |-------------------------------------------------------------------")
-Set-PSRepository PSGallery -InstallationPolicy Trusted77
+Set-PSRepository PSGallery -InstallationPolicy Trusted
 Foreach ($Module in $json.PowerShellModules) {
     Write-Host ("Verifying if {0} is installed..." -f $Module)
     if (!(Get-Module $Module -ListAvailable)) {

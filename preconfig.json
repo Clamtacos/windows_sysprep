@@ -25,5 +25,18 @@
         "Microsoft.VC++2012Redist-x86",
         "Microsoft.VC++2013Redist-x64",
         "Microsoft.VC++2013Redist-x86"
+    ],
+    "WindowsFeatures": [
+        "Containers-DisposableClientVM",
+        "HypervisorPlatform",
+        "Microsoft-Windows-Subsystem-Linux",
+        "VirtualMachinePlatform"
+    ],
+    "PowerShellModules": [
+        "NerdFonts",
+        "Posh-Git",
+        "PowerShellGet",
+        "PSReadLine",
+        "oh-my-posh",
     ]
 }
